@@ -1,0 +1,42 @@
+<div class="container mt-4">
+    <!-- Toggle Button -->
+    <div class="d-flex justify-content-end mb-3">
+        <button (click)="toggleView()" class="btn btn-light toggle-button" [ngClass]="{'selected-view': !isGridView}">
+            <i class="bi bi-list"></i>
+        </button>
+        <button (click)="toggleView()" class="btn btn-light toggle-button" [ngClass]="{'selected-view': isGridView}">
+            <i class="bi bi-grid-3x3-gap"></i>
+        </button>
+    </div>
+    
+    
+    <div *ngIf="isGridView; else listView">
+        <!-- Grid View -->
+        <div class="row">
+            <div *ngFor="let video of videos" class="col-lg-4 col-md-6 mb-3">
+                <div class="video-card" [routerLink]="['/videos', video.id]">
+                    <img [src]="video.previewUrl" alt="{{video.title}} Preview" class="img-fluid">
+                    <h3 class="mt-2">{{ video.title }}</h3>
+                    <p>Created on: {{ video.createdDate | date:'mediumDate' }}</p>
+                    <div class="author-details">
+                        <span>{{ video.author.name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <ng-template #listView>
+        <!-- List View -->
+        <div *ngFor="let video of videos" class="video-card d-flex align-items-center mb-3">
+            <img [src]="video.previewUrl" alt="{{video.title}} Preview" class="img-fluid mr-3">
+            <div>
+                <h3>{{ video.title }}</h3>
+                <p>Created on: {{ video.createdDate | date:'mediumDate' }}</p>
+                <div class="author-details">
+                    <span>{{ video.author.name }}</span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,45 @@
+/* Adjustments for Bootstrap styles */
+
+.embed-responsive {
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust author details layout */
+.author-details {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.star {
+    margin-right: 10px;
+}
+
+.bi-star-fill, .bi-camera-fill {
+    margin-right: 10px;
+}
+
+.created-date, .author-name {
+    margin-right: 100px;
+}
+
+.reaction-details img {
+    height: 50px;
+    width: 100px;
+}
+
+.image-detail {
+    align-items: end;
+}
+
+.back-button {
+    margin-bottom: 20px;
+}
+
+.author-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

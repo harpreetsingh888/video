@@ -1,0 +1,57 @@
+<div *ngIf="video" class="container mt-4">
+    <!-- Back button -->
+    <div class="back-button">
+        <button [routerLink]="['/videos']" class="btn btn-secondary">Back</button>
+    </div>
+
+    <!-- Video player -->
+    <div class="embed-responsive embed-responsive-16by9 mb-3">
+        <video #videoPlayer [src]="video.url" controls class="embed-responsive-item"></video>
+    </div>
+
+    <!-- Editable title -->
+    <div class="mb-3" *ngIf="isOwner">
+        <input [(ngModel)]="video.title" (ngModelChange)="showSaveButton = true" class="form-control" />
+        <button *ngIf="showSaveButton" (click)="saveTitle()" class="btn btn-primary mt-2">Save</button>
+    </div>
+
+    <!-- Reaction buttons -->
+    <div class="mb-3">
+        <button (click)="addReaction('star')" class="btn btn-warning mr-2 star">
+            <i class="bi bi-star-fill"></i>Star</button>
+        <button (click)="addReaction('snapshot')" class="btn btn-info snapshot">
+            <i class="bi bi-camera-fill"></i>Snapshot</button>
+    </div>
+
+    <div class="container mt-4">
+        <ul class="list-group">
+            <li *ngFor="let reaction of reactions" class="list-group-item reaction-details">
+                <div class="row align-items-center">
+                    <!-- Reaction type icon (just an example, you can use different icons) -->
+                    <div class="col-1 d-flex justify-content-center">
+                        <i [ngClass]="{'bi bi-star-fill' : reaction.type === 'star', 'bi bi-camera-fill' : reaction.type === 'snapshot'}"></i>
+                    </div>
+
+                    <!-- Timeframe -->
+                    <div class="col-md-2 col-2">
+                        <p class="mb-0">{{ reaction.timeframe }} seconds</p>
+                    </div>
+    
+                    <!-- Reaction Author's Name -->
+                    <div class="col-md-4 col-4">
+                        <strong>{{ reaction.author.name }}</strong>
+                        <p class="mb-0">{{ reaction.createdDate | date:'short' }}</p>
+                    </div>
+    
+                    <!-- Reaction Details -->
+                    <div class="col-md-4 col-4 image-detail">
+    
+                        <!-- Show image if reaction type is snapshot -->
+                        <img *ngIf="reaction.type === 'snapshot'" [src]="reaction.imageUrl" alt="Reaction snapshot"
+                            class="img-fluid rounded mt-2">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
